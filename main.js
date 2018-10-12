@@ -52,5 +52,14 @@ bot.command('/setTimeout', cmdSetTimeOut)
 
 bot.on('message', autoBurnSimple)
 
+bot.command('/help', async ({ telegram, message, reply }) => {
+  reply(`I'm a Burn after read bot.`).then((res) => {
+    burnAfterReading(ctx, res)
+  })
+  setTimeout(() => {
+    telegram.deleteMessage(message.chat.id, message.message_id)
+  }, timeout)
+})
+
 
 bot.startPolling()
