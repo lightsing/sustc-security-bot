@@ -1,0 +1,14 @@
+{
+  "name": "sustc-security",
+  "version": "1.0.0",
+  "description": "sustc security bot",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lightsing",
+  "license": "ISC",
+  "dependencies": {
+    "telegraf": "^3.24.1"
+  }
+}
