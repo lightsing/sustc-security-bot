@@ -1,5 +1,4 @@
 const Telegraf = require('telegraf')
-
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 var timeout = 60000;
@@ -35,14 +34,26 @@ const burnAfterReading = async (ctx, message) => {
   message = message || ctx.message
   console.log(`Will delete ${message.from.id} in ${message.chat.id} after ${timeout}`)
   setTimeout(() => {
-    ctx.telegram.deleteMessage(message.chat.id, message.message_id)
+    try {
+      ctx.telegram.deleteMessage(message.chat.id, message.message_id)
+    } catch (err) {
+      console.log(err.description)
+      // ignore
+      return;
+    }
   }, timeout)
 }
 
 const autoBurnSimple = async ({ telegram, message }) => {
   console.log(message)
   setTimeout(() => {
-    telegram.deleteMessage(message.chat.id, message.message_id)
+    try {
+      telegram.deleteMessage(message.chat.id, message.message_id)
+    } catch (err) {
+      console.log(err.description)
+      // ignore
+      return;
+    }
   }, timeout)
 }
 
@@ -57,7 +68,13 @@ bot.command('/help', async ({ telegram, message, reply }) => {
     burnAfterReading(ctx, res)
   })
   setTimeout(() => {
-    telegram.deleteMessage(message.chat.id, message.message_id)
+    try {
+      telegram.deleteMessage(message.chat.id, message.message_id)
+    } catch (err) {
+      console.log(err.description)
+      // ignore
+      return;
+    }
   }, timeout)
 })
 
